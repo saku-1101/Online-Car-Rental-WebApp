@@ -1,18 +1,8 @@
+// Local API Server
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { gql } from 'graphql-tag';
-
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
-
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+import { resolvers } from '@@/pages/api/apollo/resolvers/resolver';
+import { typeDefs } from '@@/pages/api/apollo/schemas/schema';
 
 const server = new ApolloServer({
   resolvers,
