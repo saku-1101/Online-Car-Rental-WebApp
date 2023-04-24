@@ -1,30 +1,18 @@
 // Client
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
+import { GetStatusDocument } from '@@/graphql/generated/graphql';
+import { _apolloClient } from '@@/apollo/client';
 import { useQuery } from '@apollo/client';
-import { graphql } from '@@/graphql/generated/gql';
 
 const inter = Inter({ subsets: ['latin'] });
 
 // codegenによって自動生成された型提供ありのgraphqlを用いる
 // ここではTypedDocumentNode
-const GET_STATUS = graphql(
-  `
-    query getStatus {
-      statuses {
-        author
-        body
-        createdAt
-        id
-      }
-    }
-  `,
-);
 
 export default function Home() {
   // TypedDocumentNodeのおかげでドキュメントをuseQueryに渡すだけで
   //　返却されるdataや第二引数など，これ以降の変数に動的に?型付けがされる
-  const { data, loading, error } = useQuery(GET_STATUS);
+  const { data, loading, error } = useQuery(GetStatusDocument);
 
   if (loading) {
     return <div>Loading...</div>;

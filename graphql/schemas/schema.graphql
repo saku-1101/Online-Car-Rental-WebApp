@@ -1,0 +1,42 @@
+type Query {
+  statuses: [Status]! # status を返す # その際に返す情報はStatusで定義されたものになる
+  # getAuthors: [String]! # 作者一覧を返す
+  hello: String! # 文字列を返す
+}
+
+type Mutation {
+  createStatus(data: StatusCreateInput!): Status!
+}
+
+type Status {
+  id: String!
+  body: String!
+  author: String!
+  createdAt: String!
+}
+
+type StatusCreateInput {
+  id: String
+  body: String!
+  author: String!
+  createdAt: String!
+}
+
+# route operation型
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+}
+
+# User型
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+# UserCreateInput型
+input UserCreateInput {
+  id: ID
+  name: String!
+  email: String!
+}

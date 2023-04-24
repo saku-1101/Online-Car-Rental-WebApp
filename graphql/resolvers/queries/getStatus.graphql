@@ -1,0 +1,8 @@
+query getStatus {
+  statuses {
+    author
+    body
+    createdAt
+    id
+  }
+}
