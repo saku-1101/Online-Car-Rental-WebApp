@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    query getStatus {\n      statuses {\n        author\n        body\n        createdAt\n        id\n      }\n    }\n  ": types.GetStatusDocument,
+    "mutation CreateUser {\n  createUser(data: {name: \"hoge\", email: \"foo@hoge.co.jp\"}) {\n    name\n  }\n}": types.CreateUserDocument,
+    "query getStatus {\n  statuses {\n    author\n    body\n    createdAt\n    id\n  }\n}": types.GetStatusDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query getStatus {\n      statuses {\n        author\n        body\n        createdAt\n        id\n      }\n    }\n  "): (typeof documents)["\n    query getStatus {\n      statuses {\n        author\n        body\n        createdAt\n        id\n      }\n    }\n  "];
+export function graphql(source: "mutation CreateUser {\n  createUser(data: {name: \"hoge\", email: \"foo@hoge.co.jp\"}) {\n    name\n  }\n}"): (typeof documents)["mutation CreateUser {\n  createUser(data: {name: \"hoge\", email: \"foo@hoge.co.jp\"}) {\n    name\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getStatus {\n  statuses {\n    author\n    body\n    createdAt\n    id\n  }\n}"): (typeof documents)["query getStatus {\n  statuses {\n    author\n    body\n    createdAt\n    id\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
