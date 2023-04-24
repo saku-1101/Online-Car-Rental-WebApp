@@ -1,5 +1,5 @@
 import { Status } from '../dataTypes/dataType';
-import { statuses } from '@@/pages/api/apollo/data/database';
+import { statuses } from '../data/database';
 
 export const resolvers = {
   Query: {

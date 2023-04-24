@@ -1,9 +1,8 @@
 // Client
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import { _apolloClient } from '@@/pages/api/apollo/client';
-import { gql, useQuery } from '@apollo/client';
-import { graphql } from '../src/gql/gql';
+import { useQuery } from '@apollo/client';
+import { graphql } from '@@/graphql/generated/gql';
 
 const inter = Inter({ subsets: ['latin'] });
 

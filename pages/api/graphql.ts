@@ -1,8 +1,8 @@
 // Local API Server
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { resolvers } from '@@/pages/api/apollo/resolvers/resolver';
-import { typeDefs } from '@@/pages/api/apollo/schemas/schema';
+import { resolvers } from '@@/graphql/resolvers/resolver';
+import { typeDefs } from '@@/graphql/schemas/schema';
 
 const server = new ApolloServer({
   resolvers,

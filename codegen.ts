@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   schema: 'http://localhost:3000/api/graphql', // apiエンドポイント
   documents: ['./pages/*.tsx'], // clientサイドでクエリが書かれている場所
   generates: {
-    './src/gql/': {
+    './graphql/generated/': {
       preset: 'client',
       plugins: ['typescript', 'typescript-operations'],
     },
