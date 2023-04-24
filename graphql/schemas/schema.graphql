@@ -9,14 +9,14 @@ type Mutation {
 }
 
 type Status {
-  id: String!
+  id: ID!
   body: String!
   author: String!
   createdAt: String!
 }
 
-type StatusCreateInput {
-  id: String
+input StatusCreateInput {
+  id: ID
   body: String!
   author: String!
   createdAt: String!

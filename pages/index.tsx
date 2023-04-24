@@ -6,9 +6,6 @@ import { useQuery } from '@apollo/client';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// codegenによって自動生成された型提供ありのgraphqlを用いる
-// ここではTypedDocumentNode
-
 export default function Home() {
   // TypedDocumentNodeのおかげでドキュメントをuseQueryに渡すだけで
   //　返却されるdataや第二引数など，これ以降の変数に動的に?型付けがされる
