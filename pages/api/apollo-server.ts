@@ -1,4 +1,5 @@
 // Local API Server
+import { PrismaClient } from '@prisma/client';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { addResolversToSchema } from '@graphql-tools/schema';
@@ -8,6 +9,7 @@ import { books, users } from '@@/graphql/data/database';
 import { BookCreateInput, UserCreateInput } from '@@/graphql/server/generated/graphql';
 import { Book, User } from '@@/graphql/dataTypes/dataType';
 
+const prisma = new PrismaClient();
 const schema = loadSchemaSync('./graphql/schemas/schema.graphql', {
   loaders: [new GraphQLFileLoader()],
 });
@@ -17,6 +19,9 @@ const resolvers = {
     hello: () => 'Hello world!',
     books: () => books,
     users: () => users,
+    allUsers: () => {
+      return prisma.user.findMany();
+    },
   },
   Mutation: {
     createBook: (input: BookCreateInput) => {
