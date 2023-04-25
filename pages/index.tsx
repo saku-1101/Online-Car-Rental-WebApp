@@ -1,15 +1,20 @@
 // Client
 import { Inter } from 'next/font/google';
-import { GetBooksDocument, SayHelloDocument } from '@@/pages/api/front/generated/graphql';
+import { GetBooksDocument, GetUsersDocument, SayHelloDocument } from '@@/pages/api/front/generated/graphql';
 import { useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   // TypedDocumentNodeでドキュメントをuseQueryに渡すだけで
   //　返却されるdataや第二引数など，これ以降の変数に動的に?型付けがされる
-  const { data, loading, error } = useQuery(GetBooksDocument);
-
+  const [message, setMessage] = useState('');
+  const { data, loading, error } = useQuery(GetUsersDocument);
+  const HandleGetData = async () => {
+    // const message = await useQuery(SayHelloDocument);
+    setMessage('Hora!');
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -28,12 +33,20 @@ export default function Home() {
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+      <h1>Users</h1>
       <div>
-        {data.books.map((book, index) => {
-          return <p key={index}>{book?.author}</p>;
+        {data.allUsers.map((user, index) => {
+          return (
+            <div key={index}>
+              <p>
+                {user?.id} {user?.name}
+              </p>
+            </div>
+          );
         })}
-        {/* {data.hello} */}
+        {message}
       </div>
+      <button onClick={() => HandleGetData()}>Button</button>
     </main>
   );
 }

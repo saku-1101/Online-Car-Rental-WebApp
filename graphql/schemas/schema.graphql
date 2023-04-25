@@ -2,7 +2,8 @@
 type Query {
   hello: String!
   books: [Book]! # books を返す # その際に返す情報はBookで定義されたものになる
-  users: [User]!
+  users: [User!]!
+  allUsers: [User!]!
 }
 # route operation type
 type Mutation {

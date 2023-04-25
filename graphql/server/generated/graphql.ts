@@ -48,9 +48,10 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  allUsers: Array<User>;
   books: Array<Maybe<Book>>;
   hello: Scalars['String'];
-  users: Array<Maybe<User>>;
+  users: Array<User>;
 };
 
 export type User = {
@@ -178,9 +179,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  allUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

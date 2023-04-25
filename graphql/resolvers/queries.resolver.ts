@@ -5,4 +5,5 @@ export const queries: QueryResolvers = {
   hello: () => 'Hello world!',
   books: () => books,
   users: () => users,
+  allUsers: () => users,
 };

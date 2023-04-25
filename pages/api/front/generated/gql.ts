@@ -16,6 +16,7 @@ const documents = {
     "mutation CreateBook($input: BookCreateInput!) {\n  createBook(input: $input) {\n    body\n    author\n    createdAt\n  }\n}": types.CreateBookDocument,
     "mutation CreateUser {\n  createUser(data: {name: \"hoge\", email: \"foo@hoge.co.jp\"}) {\n    name\n  }\n}": types.CreateUserDocument,
     "query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}": types.GetBooksDocument,
+    "query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}": types.GetUsersDocument,
     "query sayHello {\n  hello\n}": types.SayHelloDocument,
 };
 
@@ -45,6 +46,10 @@ export function graphql(source: "mutation CreateUser {\n  createUser(data: {name
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}"): (typeof documents)["query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}"): (typeof documents)["query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
