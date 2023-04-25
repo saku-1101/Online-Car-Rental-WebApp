@@ -11,14 +11,17 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String?
-  email String  @unique
+  id    String @id @unique @default(cuid())
+  name  String
+  email String
+  books Book[]
 }
 
-model Status {
-  id    Int     @id @default(autoincrement())
-  body  String?
-  author String  @unique
-  createdAt String  @unique
+model Book {
+  id        String  @id @unique @default(cuid())
+  body      String
+  author    String
+  createdAt String
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
 }
