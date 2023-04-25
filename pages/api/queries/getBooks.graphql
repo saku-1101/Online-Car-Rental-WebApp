@@ -1,5 +1,5 @@
-query getStatus {
-  statuses {
+query getBooks {
+  books {
     author
     body
     createdAt

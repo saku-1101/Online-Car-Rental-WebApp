@@ -1,5 +1,0 @@
-mutation CreateStatus {
-  createStatus(data: { body: "SSS", author: "SSS", createdAt: "SSS" }) {
-    author
-  }
-}

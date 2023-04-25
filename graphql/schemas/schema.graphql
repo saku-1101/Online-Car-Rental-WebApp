@@ -1,42 +1,46 @@
+# route operation type
 type Query {
-  statuses: [Status]! # status を返す # その際に返す情報はStatusで定義されたものになる
-  # getAuthors: [String]! # 作者一覧を返す
-  hello: String! # 文字列を返す
+  hello: String!
+  books: [Book]! # books を返す # その際に返す情報はBookで定義されたものになる
+  users: [User]!
 }
-
+# route operation type
 type Mutation {
-  createStatus(data: StatusCreateInput!): Status!
+  createBook(input: BookCreateInput): Book
 }
-
-type Status {
+# Obj-type
+type Book {
   id: ID!
   body: String!
   author: String!
   createdAt: String!
 }
-
-input StatusCreateInput {
+# Input type
+input BookCreateInput {
   id: ID
   body: String!
   author: String!
   createdAt: String!
 }
 
-# route operation型
+# route operation type
 type Mutation {
-  createUser(data: UserCreateInput!): User!
+  createUser(data: UserCreateInput): User
 }
 
-# User型
+# Obj-type
 type User {
   id: ID!
   name: String!
   email: String!
+  books: [Book]
 }
 
-# UserCreateInput型
+# Input type
 input UserCreateInput {
   id: ID
   name: String!
   email: String!
+  # books: [Book] // インプットを受け付けるくせに，オブジェクト方をインプットするように指定したらいけないよねということ
+  # クライアントはオブジェクト型にどうインプットしたらいいのだ
 }

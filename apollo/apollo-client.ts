@@ -14,7 +14,7 @@ function createIsomorphLink() {
   //   return new SchemaLink({ schema });
   // } else {
   return new HttpLink({
-    uri: '/api/graphql',
+    uri: '/api/apollo-server',
     credentials: 'same-origin',
   });
   // }
