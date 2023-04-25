@@ -14,6 +14,8 @@ type Book {
   body: String!
   author: String!
   createdAt: String!
+  User: User
+  userId: ID
 }
 # Input type
 input BookCreateInput {

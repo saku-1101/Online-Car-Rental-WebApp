@@ -15,10 +15,12 @@ export type Scalars = {
 
 export type Book = {
   __typename?: 'Book';
+  User?: Maybe<User>;
   author: Scalars['String'];
   body: Scalars['String'];
   createdAt: Scalars['String'];
   id: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
 
 export type BookCreateInput = {
@@ -161,10 +163,12 @@ export type ResolversParentTypes = {
 };
 
 export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
+  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

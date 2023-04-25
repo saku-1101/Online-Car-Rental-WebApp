@@ -16,10 +16,12 @@ export type Scalars = {
 
 export type Book = {
   __typename?: 'Book';
+  User?: Maybe<User>;
   author: Scalars['String'];
   body: Scalars['String'];
   createdAt: Scalars['String'];
   id: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
 
 export type BookCreateInput = {
