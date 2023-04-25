@@ -1,0 +1,8 @@
+query getBooks {
+  books {
+    author
+    body
+    createdAt
+    id
+  }
+}
