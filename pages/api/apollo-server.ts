@@ -5,9 +5,9 @@ import { loadSchemaSync } from '@graphql-tools/load';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { books, users } from '@@/graphql/data/database';
+import { books, users } from '@@/graphql/data/mock_data';
 import { BookCreateInput, UserCreateInput } from '@@/graphql/server/generated/graphql';
-import { Book, User } from '@@/graphql/dataTypes/dataType';
+import { Book, User } from '@@/graphql/server/generated/graphql';
 
 const prisma = new PrismaClient();
 const schema = loadSchemaSync('./graphql/schemas/schema.graphql', {

@@ -1,4 +1,4 @@
-import { books, users } from '@@/graphql/data/database';
+import { books, users } from '@@/graphql/data/mock_data';
 import { QueryResolvers } from '../server/generated/graphql';
 
 export const queries: QueryResolvers = {

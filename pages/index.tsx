@@ -1,10 +1,7 @@
 // Client
-import { Inter } from 'next/font/google';
 import { GetBooksDocument, GetUsersDocument, SayHelloDocument } from '@@/pages/api/front/generated/graphql';
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   // TypedDocumentNodeでドキュメントをuseQueryに渡すだけで
@@ -32,7 +29,7 @@ export default function Home() {
   // console.log(data.hello);
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+    <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
       <h1>Users</h1>
       <div>
         {data.allUsers.map((user, index) => {
