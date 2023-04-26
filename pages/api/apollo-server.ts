@@ -1,60 +1,25 @@
 // Local API Server
-import { PrismaClient } from '@prisma/client';
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-import { loadSchemaSync } from '@graphql-tools/load';
-import { addResolversToSchema } from '@graphql-tools/schema';
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { books, users } from '@@/graphql/data/mock_data';
-import { BookCreateInput, UserCreateInput } from '@@/graphql/server/generated/graphql';
-import { Book, User } from '@@/graphql/server/generated/graphql';
+import { Resolvers } from '@@/graphql/server/generated/graphql';
+import { schema } from '@@/graphql/schemas/schema';
+import { mutations, queries, bookResolvers, userResolvers } from '@@/graphql/resolvers/index';
 
-const prisma = new PrismaClient();
-const schema = loadSchemaSync('./graphql/schemas/schema.graphql', {
-  loaders: [new GraphQLFileLoader()],
-});
-// const resolvers = loadFilesSync(path.join(__dirname, '../../graphql/resolvers'));
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    hello: () => 'Hello world!',
-    books: () => books,
-    users: () => users,
-    allUsers: () => {
-      return prisma.user.findMany();
-    },
+    ...queries,
   },
   Mutation: {
-    createBook: (input: BookCreateInput) => {
-      return books.find((book) => book.id == input.id);
-    },
-    createUser: (input: UserCreateInput) => {
-      return users.find((user) => user.id == input.id);
-    },
+    ...mutations,
   },
   Book: {
-    author: (book: Book) => book.id,
-    body: (book: Book) => book.body,
-    createdAt: (book: Book) => book.createdAt,
-    id: (book: Book) => book.id,
+    ...bookResolvers,
   },
   User: {
-    email: (user: User) => user.email,
-    name: (user: User) => user.name,
-    id: (user: User) => user.id,
+    ...userResolvers,
   },
 };
-// const schemaWithResolvers = addResolversToSchema({
-//   schema,
-//   resolvers: mergeResolvers(resolvers),
-// });
-const schemaWithResolvers = addResolversToSchema({
-  schema,
-  resolvers: resolvers,
-});
-// const schema = makeExecutableSchema({
-//   typeDefs: typeDefs,
-//   resolvers: ,
-// });
-const server = new ApolloServer({ schema: schemaWithResolvers });
+
+const server = new ApolloServer({ typeDefs: schema, resolvers: resolvers });
 
 export default startServerAndCreateNextHandler(server);
