@@ -1,53 +1,34 @@
-import { Book, User } from '../dataTypes/dataType';
+import { books, users } from '@@/graphql/data/mock_data';
+import { Book as BookType, User as UserType } from '../server/generated/graphql';
 
-const books: Book[] = [
-  {
-    id: '2',
-    body: 'inviting coworkers',
-    author: 'jack',
-    createdAt: new Date(2021, 4, 2).toISOString(),
-  },
-  {
-    id: '1',
-    body: 'just setting up my app',
-    author: 'jack',
-    createdAt: new Date(2021, 4, 1).toISOString(),
-  },
-];
+class User {
+  id: string;
+  name: string;
+  email: string;
+  constructor(name: string, email: string) {
+    this.id = String(books.length + 1);
+    this.name = name;
+    this.email = email;
+  }
+}
 
-const users: User[] = [
-  {
-    id: '2',
-    name: 'Sakura',
-    email: 'sakura@mail',
-    books: [
-      {
-        id: '1',
-        body: 'just setting up my app',
-        author: 'jack',
-        createdAt: new Date(2021, 4, 1).toISOString(),
-      },
-    ],
-  },
-  {
-    id: '1',
-    name: 'Yuta',
-    email: 'yuta@mail',
-    books: [
-      {
-        id: '2',
-        body: 'inviting coworkers',
-        author: 'jack',
-        createdAt: new Date(2021, 4, 2).toISOString(),
-      },
-      {
-        id: '1',
-        body: 'just setting up my app',
-        author: 'jack',
-        createdAt: new Date(2021, 4, 1).toISOString(),
-      },
-    ],
-  },
-];
+class Book {
+  id: string;
+  body: string;
+  author: string;
+  createdAt: string;
+  constructor(author: string, body: string) {
+    this.id = String(books.length + 1);
+    this.author = author;
+    this.body = body;
+    this.createdAt = new Date().toISOString();
+  }
+}
 
-export { books, users };
+export function createUserObj(name: string, email: string): UserType {
+  return new User(name, email);
+}
+
+export function createBookObj(author: string, body: string): BookType {
+  return new Book(author, body);
+}

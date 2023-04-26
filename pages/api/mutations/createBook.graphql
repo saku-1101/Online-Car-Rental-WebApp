@@ -1,5 +1,6 @@
-mutation CreateBook($input: BookCreateInput!) {
-  createBook(input: $input) {
+mutation CreateBook($data: BookCreateInput!) {
+  createBook(data: $data) {
+    id
     body
     author
     createdAt

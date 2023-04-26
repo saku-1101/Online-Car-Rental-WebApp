@@ -4,6 +4,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,35 +16,32 @@ export type Scalars = {
 
 export type Book = {
   __typename?: 'Book';
-  User?: Maybe<User>;
   author: Scalars['String'];
   body: Scalars['String'];
   createdAt: Scalars['String'];
   id: Scalars['ID'];
-  userId?: Maybe<Scalars['ID']>;
 };
 
 export type BookCreateInput = {
   author: Scalars['String'];
   body: Scalars['String'];
-  createdAt: Scalars['String'];
   id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createBook?: Maybe<Book>;
-  createUser?: Maybe<User>;
+  createBook: Book;
+  createUser: User;
 };
 
 
 export type MutationCreateBookArgs = {
-  input?: InputMaybe<BookCreateInput>;
+  data: BookCreateInput;
 };
 
 
 export type MutationCreateUserArgs = {
-  data?: InputMaybe<UserCreateInput>;
+  data: UserCreateInput;
 };
 
 export type Query = {
@@ -56,7 +54,6 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
-  books?: Maybe<Array<Maybe<Book>>>;
   email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -164,18 +161,16 @@ export type ResolversParentTypes = {
 };
 
 export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
-  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createBook?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, Partial<MutationCreateBookArgs>>;
-  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationCreateUserArgs>>;
+  createBook?: Resolver<ResolversTypes['Book'], ParentType, ContextType, RequireFields<MutationCreateBookArgs, 'data'>>;
+  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'data'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -186,7 +181,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

@@ -7,7 +7,7 @@ type Query {
 }
 # route operation type
 type Mutation {
-  createBook(input: BookCreateInput): Book
+  createBook(data: BookCreateInput!): Book!
 }
 # Obj-type
 type Book {
@@ -15,20 +15,17 @@ type Book {
   body: String!
   author: String!
   createdAt: String!
-  User: User
-  userId: ID
 }
 # Input type
 input BookCreateInput {
   id: ID
   body: String!
   author: String!
-  createdAt: String!
 }
 
 # route operation type
 type Mutation {
-  createUser(data: UserCreateInput): User
+  createUser(data: UserCreateInput!): User!
 }
 
 # Obj-type
@@ -36,7 +33,6 @@ type User {
   id: ID!
   name: String!
   email: String!
-  books: [Book]
 }
 
 # Input type
@@ -44,6 +40,6 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String!
-  # books: [Book] // インプットを受け付けるくせに，オブジェクト方をインプットするように指定したらいけないよねということ
+  #books: [Book] # インプットを受け付けるくせに，オブジェクト方をインプットするように指定したらいけないよねということ
   # クライアントはオブジェクト型にどうインプットしたらいいのだ
 }

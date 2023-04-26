@@ -1,5 +1,7 @@
-mutation CreateUser {
-  createUser(data: { name: "hoge", email: "foo@hoge.co.jp" }) {
+mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
     name
+    email
   }
 }
