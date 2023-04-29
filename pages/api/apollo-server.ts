@@ -3,8 +3,16 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { Resolvers } from '@@/graphql/server/generated/graphql';
 import { schema } from '@@/graphql/schemas/schema';
-import { mutations, queries, bookResolvers, userResolvers } from '@@/graphql/resolvers/index';
+import {
+  mutations,
+  queries,
+  Rental as rental,
+  Customer as customer,
+  Car as car,
+  PaymentMethod as paymentMethod,
+} from '@@/graphql/resolvers/index';
 
+// Queries that you can use to test the API
 const resolvers: Resolvers = {
   Query: {
     ...queries,
@@ -12,11 +20,17 @@ const resolvers: Resolvers = {
   Mutation: {
     ...mutations,
   },
-  Book: {
-    ...bookResolvers,
+  Rental: {
+    ...rental,
   },
-  User: {
-    ...userResolvers,
+  Customer: {
+    ...customer,
+  },
+  Car: {
+    ...car,
+  },
+  PaymentMethod: {
+    ...paymentMethod,
   },
 };
 
