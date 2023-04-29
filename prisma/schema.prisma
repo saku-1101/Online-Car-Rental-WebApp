@@ -7,18 +7,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String @id @unique @default(cuid())
-  name  String
-  email String
-  Book  Book[]
+model Customer {
+  customer_id  Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone_number  String
+  address     String
+  city     String
+  suburb     String
+  state     String
+
+  rentals     Rental[]
 }
 
-model Book {
-  id        String  @id @unique @default(cuid())
-  body      String
-  author    String
-  createdAt String
-  userId    String?
-  User      User?   @relation(fields: [userId], references: [id])
+model Car {
+  car_id       Int      @id @default(autoincrement())
+  availability        Boolean
+  category         String
+  brand         String
+  model        String
+  model_year         Int
+  mileage      Int
+  fuel_type        String
+  seats        Int
+  price_per_day Float
+  description String
+
+  rentals      Rental[]
+}
+
+model PaymentMethod {
+  payment_id     Int    @id @default(autoincrement())
+  name   String
+  rentals Rental[]
+}
+
+model Rental {
+  rental_id    Int      @id @default(autoincrement())
+  rental_days    Int
+  total_price  Float
+
+  car          Car      @relation(fields: [car_id], references: [car_id])
+  car_id       Int
+
+  customer     Customer @relation(fields: [customer_id], references: [customer_id])
+  customer_id  Int
+
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [payment_id])
+  paymentMethodId Int
 }
