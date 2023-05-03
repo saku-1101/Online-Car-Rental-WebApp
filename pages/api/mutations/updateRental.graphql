@@ -1,0 +1,6 @@
+mutation updateRental($rentalId: Int!, $input: CreateRentalInput!) {
+  updateRental(rental_id: $rentalId, input: $input) {
+    rental_days
+    total_price
+  }
+}
