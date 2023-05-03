@@ -16,10 +16,11 @@ type Rental = {
     | null
     | undefined;
 };
+type Funk<T> = (param: T) => T;
 type RentalsContextType = {
-  rentals: Rental[];
+  rentals: Rental[] | Funk<Rental[]>;
   HandleSetRentals: (rental: Rental) => void;
   HandleDeleteRentals: (rental: Rental[]) => void;
 };
 
-export type { Rental, RentalsContextType };
+export type { Rental, Funk, RentalsContextType };

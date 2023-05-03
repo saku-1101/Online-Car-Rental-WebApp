@@ -67,7 +67,7 @@ export default function Cart() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className='flex flex-col justify-center'>
+    <div className='flex flex-col justify-center gap-10'>
       <PageTitle title='Your Cart' />
       <div className='flex justify-center'>
         <div className='w-3/4 grid grid-cols-3 gap-10'>

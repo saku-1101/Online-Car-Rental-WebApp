@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext } from 'react';
 import { usePersistedState } from './usePersistedState';
 import React from 'react';
-import { Rental, RentalsContextType } from './types/rentalContextTypes';
+import { Rental, Funk, RentalsContextType } from './types/rentalContextTypes';
 
 const RentalsContextTypeDefaultValue = {
   rentals: [],
@@ -20,12 +20,12 @@ export const useRentalsContext = () => {
 }; // contextを使う側へのエクスポート
 
 export const RentalsProvider = ({ children }: RentalsProviderProps) => {
-  const [rentals, setRentals] = usePersistedState<Rental[]>({
+  const [rentals, setRentals] = usePersistedState<Rental[] | Funk<Rental[]>>({
     key: 'rentals',
     initialValue: [],
   });
   const HandleSetRentals = useCallback((rental: Rental) => {
-    setRentals((prevRentals: Rental[]) => [...prevRentals, rental]);
+    setRentals((prevRentals) => [...prevRentals, rental]);
   }, []);
   const HandleDeleteRentals = useCallback((newRentals: Rental[]) => {
     setRentals((prevRentals) => prevRentals.filter((r) => newRentals.includes(r)));
