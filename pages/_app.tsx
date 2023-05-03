@@ -12,11 +12,15 @@ import Footer from '@@/components/atoms/Footer';
 // Apollo Clientは現段階ではpages配下でしか呼び出せない模様
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={_apolloClient}>
-      <NavBar />
-      <Component {...pageProps} />
-      <DraggableCart />
-      <Footer />
-    </ApolloProvider>
+    <CustomerProvider>
+      <RentalsProvider>
+        <ApolloProvider client={_apolloClient}>
+          <NavBar />
+          <Component {...pageProps} />
+          <DraggableCart />
+          <Footer />
+        </ApolloProvider>
+      </RentalsProvider>
+    </CustomerProvider>
   );
 }
