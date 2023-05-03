@@ -15,8 +15,6 @@ export default function DraggableCart() {
   // localstorageに保存されているrentals(以前の値を保持)とサーバ側の値が違うのでhidrationエラーが出る
   // useEffectでlocalstorageに保存されているrentalsを取得
   useEffect(() => {
-    console.log(rentals);
-
     const items = rentals.length;
     const nameOfCars: string[] = rentals.map((rental) => {
       return rental.car?.brand || '';
