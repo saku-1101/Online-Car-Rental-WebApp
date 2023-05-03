@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "npx prisma generate",
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "export": "next build && next export -o dist",

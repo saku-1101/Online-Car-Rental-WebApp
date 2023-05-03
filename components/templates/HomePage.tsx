@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { usePersistedState } from '@@/hooks/usePersistedState';
+import logo from '@@/assets/Logo-removebg.png';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
@@ -17,9 +19,9 @@ export default function Home() {
   }, [firstLoaded]);
 
   return (
-    <div className='hero'>
-      <div className='hero-content flex-col lg:flex-row'>
-        <img src='../assets/Logo-removebg.jpg' alt='' className='max-w-sm rounded-lg shadow-2xl' />
+    <div className='hero w-full h-full'>
+      <div className='hero-content flex-col justify-center gap-5'>
+        <Image src={logo} alt='' className='max-w-sm rounded-lg' />
         <div>
           <h1 className='text-5xl font-bold'>
             Welcome to <span className='text-secondary'>Hertz Car Store</span>!
@@ -28,10 +30,10 @@ export default function Home() {
             🌸 We're happy to be here to help you with an extraordinary online-shopping experience! <br></br>
             Start your shopping from the entrance below!
           </p>
-          <Link href='/products'>
-            <button className='btn btn-outline'>Get Started!</button>
-          </Link>
         </div>
+        <Link href='/products'>
+          <button className='btn btn-outline'>Get Started!</button>
+        </Link>
       </div>
     </div>
   );

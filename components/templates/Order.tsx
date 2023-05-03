@@ -9,6 +9,7 @@ import { UpdatePaymentMethodDocument } from '@@/pages/api/front/generated/graphq
 import { useRouter } from 'next/router';
 import { useRentalsContext } from '@@/hooks/useRentalContext';
 import { usePersistedState } from '@@/hooks/usePersistedState';
+import Footer from '@@/components/atoms/Footer';
 
 // TODO:Then, checkout
 
@@ -51,18 +52,17 @@ export default function Order() {
 
   return (
     <>
-      <div className='w-screen h-screen flex flex-col items-center justify-center gap-6'>
+      <div className='w-screen h-screen flex flex-col items-center justify-center'>
         <PageTitle title='Place the Order' />
 
-        <div className='flex flex-col w-full border-opacity-50'>
+        <div className='flex flex-col w-3/4 border-opacity-50'>
           <div className='divider'>Content</div>
           <div className='overflow-x-auto'>
             <table className='table w-full'>
               {/* head */}
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Name</th>
+                  <td>Name</td>
                   <th>Rental Days</th>
                   <th>Sub Total</th>
                 </tr>
@@ -72,7 +72,6 @@ export default function Order() {
                 {data.customer.rentals!.map((rental) => {
                   return (
                     <tr key={rental.rental_id}>
-                      <th></th>
                       <td>
                         {rental.car!.brand}-{rental.car!.model}-{rental.car!.model_year}
                       </td>
@@ -118,6 +117,7 @@ export default function Order() {
           </div>
           <div className='divider'>Payment Method</div>
         </div>
+
         <select className='select select-accent w-full max-w-xs'>
           <option disabled selected>
             Select the payment method
@@ -131,11 +131,18 @@ export default function Order() {
           })}
         </select>
 
-        <div className='w-full flex flex-row justify-center gap-10'>
+        <div className='w-full flex flex-row justify-center my-5'>
           <button className='btn btn-secondary' onClick={() => checkOut()}>
             Checkout
           </button>
         </div>
+
+        {/* invisible */}
+        <footer className='invisible footer footer-center p-4 bg-accent-focus text-base-content mt-5 sticky bottom-0 z-10 px-10 drop-shadow-md'>
+          <div>
+            <p>Copyright © {new Date().getFullYear()} - All right reserved by Sakura A</p>
+          </div>
+        </footer>
       </div>
     </>
   );
