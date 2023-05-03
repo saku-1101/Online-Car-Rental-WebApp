@@ -22,18 +22,16 @@ export default function Cart() {
     setRs(rentals);
   }, [rentals]);
 
-  // TODO: add a state to check if the rental days are selected
-  // 不要
-  const [itemsStateTable, setItemsStateTable] = useState<itemState[]>([]);
-  const setSelected = (rental_id: number, isSelected: boolean) => {
-    setItemsStateTable((prevState) => [...prevState, { rental_id: rental_id, isSelected: isSelected }]);
-  };
-
-  // TODO: add a subtotal state to reflect to the total
-  // 不要
-  const [subTotals, setSubTotals] = useState<itemSubTotal[]>([]);
-  const setTotal = (rental_id: number, subTotal: number) => {
-    setSubTotals((prevSubTotal) => [...prevSubTotal, { rental_id: rental_id, subTotal: subTotal }]);
+  // change total_price when the user changes the rental days
+  const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
+    const newRs = rs.map((rental) => {
+      if (rental.rental_id === rental_id) {
+        return { ...rental, total_price: fee, rental_days: days };
+      } else {
+        return rental;
+      }
+    });
+    setRs(newRs);
   };
 
   // Delete a rental from the UI and localstorage
