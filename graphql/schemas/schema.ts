@@ -3,12 +3,13 @@ export const schema = gql`
   type Customer {
     customer_id: Int!
     name: String!
+    postCode: String!
     email: String!
     phone_number: String!
     address: String!
-    city: String!
     suburb: String!
     state: String!
+    country: String!
     rentals: [Rental!] # nullable
   }
 
@@ -44,12 +45,13 @@ export const schema = gql`
 
   input CreateCustomerInput {
     name: String!
+    postCode: String!
     email: String!
     phone_number: String!
     address: String!
-    city: String!
     suburb: String!
     state: String!
+    country: String!
   }
 
   input CreateCarInput {
