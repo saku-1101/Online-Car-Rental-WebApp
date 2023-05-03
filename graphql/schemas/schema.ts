@@ -56,6 +56,7 @@ export const schema = gql`
 
   input CreateCarInput {
     availability: Boolean!
+    category: String!
     brand: String!
     model: String!
     model_year: Int!
