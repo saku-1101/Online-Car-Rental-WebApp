@@ -1,0 +1,13 @@
+mutation updatePaymentMethod($input: CreateRentalInput!, $rentalId: Int!) {
+  updateRental(input: $input, rental_id: $rentalId) {
+    rental_id
+    paymentMethod {
+      name
+      payment_id
+    }
+    customer {
+      customer_id
+      email
+    }
+  }
+}
