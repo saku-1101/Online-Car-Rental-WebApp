@@ -23,7 +23,7 @@ export default function OrderCard(props: {
   // 初期値を１にして，ユーザにdeleteさせる
   useLayoutEffect(() => {
     setFee(props.rental.car?.price_per_day || 0);
-  }, []);
+  });
 
   return (
     <>
