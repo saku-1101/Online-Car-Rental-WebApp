@@ -1,0 +1,7 @@
+mutation DeleteRental($rentalId: Int!) {
+  deleteRental(rental_id: $rentalId) {
+    rental_id
+    total_price
+    rental_days
+  }
+}
