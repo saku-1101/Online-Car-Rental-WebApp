@@ -45,10 +45,11 @@ export type CreateCarInput = {
 
 export type CreateCustomerInput = {
   address: Scalars['String'];
-  city: Scalars['String'];
+  country: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
   phone_number: Scalars['String'];
+  postCode: Scalars['String'];
   state: Scalars['String'];
   suburb: Scalars['String'];
 };
@@ -67,11 +68,12 @@ export type CreateRentalInput = {
 export type Customer = {
   __typename?: 'Customer';
   address: Scalars['String'];
-  city: Scalars['String'];
+  country: Scalars['String'];
   customer_id: Scalars['Int'];
   email: Scalars['String'];
   name: Scalars['String'];
   phone_number: Scalars['String'];
+  postCode: Scalars['String'];
   rentals?: Maybe<Array<Rental>>;
   state: Scalars['String'];
   suburb: Scalars['String'];
@@ -329,11 +331,12 @@ export type CarResolvers<ContextType = any, ParentType extends ResolversParentTy
 
 export type CustomerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Customer'] = ResolversParentTypes['Customer']> = {
   address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   customer_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   phone_number?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  postCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rentals?: Resolver<Maybe<Array<ResolversTypes['Rental']>>, ParentType, ContextType>;
   state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   suburb?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
