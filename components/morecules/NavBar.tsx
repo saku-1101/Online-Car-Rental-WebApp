@@ -1,7 +1,5 @@
-import NavMenu from '../atoms/NavMenu';
-import StoreLogo from '../atoms/StoreLogo';
-import SearchBox from '../atoms/SearchBox';
-import BreadCrumbs from '../atoms/BreadCrumbs';
+import NavMenu from '@@/components/atoms/NavMenu';
+import StoreLogo from '@@/components/atoms/StoreLogo';
 
 export default function NavBar() {
   return (
@@ -9,12 +7,7 @@ export default function NavBar() {
       <div className='navbar-start gap-10'>
         <NavMenu />
         <StoreLogo />
-        {/* <BreadCrumbs /> */}
       </div>
-
-      {/* <div className='navbar-end flex'>
-        <SearchBox />
-      </div> */}
     </div>
   );
 }
