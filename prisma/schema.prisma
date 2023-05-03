@@ -10,12 +10,13 @@ datasource db {
 model Customer {
   customer_id  Int      @id @default(autoincrement())
   name        String
+  postCode        String
   email       String
   phone_number  String
   address     String
-  city     String
   suburb     String
   state     String
+  country     String
 
   rentals     Rental[]
 }

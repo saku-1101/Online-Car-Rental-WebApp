@@ -2,12 +2,13 @@
 CREATE TABLE "Customer" (
     "customer_id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "postCode" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone_number" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
     "suburb" TEXT NOT NULL,
     "state" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("customer_id")
 );
