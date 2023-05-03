@@ -2,14 +2,22 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'graphql/schemas/schema.ts', // スキーマcodegen
-  documents: ['./pages/api/**/*.graphql'], // frontクエリcodegen
+  schema: 'graphql/schemas/schema.ts', // schema codegen
+  documents: ['./pages/**/*.{graphql, ts, tsx}'], // front codegen
   generates: {
     './graphql/server/generated/graphql.ts': {
       // server
       plugins: ['typescript', 'typescript-resolvers'],
       config: {
         rawRequest: true,
+        mapperTypeSuffix: 'Model', // これを指定しないと，型定義が重複してしまう
+        mappers: {
+          Customer: '@@/node_modules/.prisma/client#Customer',
+          Car: '@@/node_modules/.prisma/client#Car',
+          PaymentMethod: '@@/node_modules/.prisma/client#PaymentMethod',
+          Rental: '@@/node_modules/.prisma/client#Rental',
+        },
+        inputMaybeValue: 'undefined | T',
       },
     },
     './pages/api/front/generated/': {

@@ -1,0 +1,24 @@
+query Customer($customerId: Int!) {
+  customer(customer_id: $customerId) {
+    customer_id
+    name
+    email
+    phone_number
+    postCode
+    address
+    suburb
+    state
+    country
+    rentals {
+      rental_id
+      rental_days
+      total_price
+      car {
+        brand
+        car_id
+        model_year
+        model
+      }
+    }
+  }
+}

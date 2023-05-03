@@ -13,11 +13,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "mutation CreateBook($data: BookCreateInput!) {\n  createBook(data: $data) {\n    id\n    body\n    author\n    createdAt\n  }\n}": types.CreateBookDocument,
-    "mutation CreateUser($data: UserCreateInput!) {\n  createUser(data: $data) {\n    id\n    name\n    email\n  }\n}": types.CreateUserDocument,
-    "query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}": types.GetBooksDocument,
-    "query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}": types.GetUsersDocument,
-    "query sayHello {\n  hello\n}": types.SayHelloDocument,
+    "mutation CreateCustomer($input: CreateCustomerInput!) {\n  createCustomer(input: $input) {\n    customer_id\n  }\n}": types.CreateCustomerDocument,
+    "mutation CreateRental($input: CreateRentalInput!) {\n  createRental(input: $input) {\n    rental_id\n    rental_days\n    total_price\n    car {\n      brand\n      car_id\n      model\n      model_year\n      price_per_day\n    }\n  }\n}": types.CreateRentalDocument,
+    "mutation DeleteRental($rentalId: Int!) {\n  deleteRental(rental_id: $rentalId) {\n    rental_id\n    total_price\n    rental_days\n  }\n}": types.DeleteRentalDocument,
+    "mutation updatePaymentMethod($input: CreateRentalInput!, $rentalId: Int!) {\n  updateRental(input: $input, rental_id: $rentalId) {\n    rental_id\n    paymentMethod {\n      name\n      payment_id\n    }\n    customer {\n      customer_id\n      email\n    }\n  }\n}": types.UpdatePaymentMethodDocument,
+    "mutation updateRental($rentalId: Int!, $input: CreateRentalInput!) {\n  updateRental(rental_id: $rentalId, input: $input) {\n    rental_days\n    total_price\n  }\n}": types.UpdateRentalDocument,
+    "query getCars {\n  cars {\n    availability\n    brand\n    car_id\n    category\n    description\n    fuel_type\n    mileage\n    model\n    model_year\n    price_per_day\n    seats\n  }\n}": types.GetCarsDocument,
+    "query Customer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    customer_id\n    name\n    email\n    phone_number\n    postCode\n    address\n    suburb\n    state\n    country\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model_year\n        model\n      }\n    }\n  }\n}": types.CustomerDocument,
+    "query getRentalsOfCustomer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model\n        model_year\n        price_per_day\n      }\n    }\n  }\n}": types.GetRentalsOfCustomerDocument,
 };
 
 /**
@@ -37,23 +40,35 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation CreateBook($data: BookCreateInput!) {\n  createBook(data: $data) {\n    id\n    body\n    author\n    createdAt\n  }\n}"): (typeof documents)["mutation CreateBook($data: BookCreateInput!) {\n  createBook(data: $data) {\n    id\n    body\n    author\n    createdAt\n  }\n}"];
+export function graphql(source: "mutation CreateCustomer($input: CreateCustomerInput!) {\n  createCustomer(input: $input) {\n    customer_id\n  }\n}"): (typeof documents)["mutation CreateCustomer($input: CreateCustomerInput!) {\n  createCustomer(input: $input) {\n    customer_id\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation CreateUser($data: UserCreateInput!) {\n  createUser(data: $data) {\n    id\n    name\n    email\n  }\n}"): (typeof documents)["mutation CreateUser($data: UserCreateInput!) {\n  createUser(data: $data) {\n    id\n    name\n    email\n  }\n}"];
+export function graphql(source: "mutation CreateRental($input: CreateRentalInput!) {\n  createRental(input: $input) {\n    rental_id\n    rental_days\n    total_price\n    car {\n      brand\n      car_id\n      model\n      model_year\n      price_per_day\n    }\n  }\n}"): (typeof documents)["mutation CreateRental($input: CreateRentalInput!) {\n  createRental(input: $input) {\n    rental_id\n    rental_days\n    total_price\n    car {\n      brand\n      car_id\n      model\n      model_year\n      price_per_day\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}"): (typeof documents)["query getBooks {\n  books {\n    author\n    body\n    createdAt\n    id\n  }\n}"];
+export function graphql(source: "mutation DeleteRental($rentalId: Int!) {\n  deleteRental(rental_id: $rentalId) {\n    rental_id\n    total_price\n    rental_days\n  }\n}"): (typeof documents)["mutation DeleteRental($rentalId: Int!) {\n  deleteRental(rental_id: $rentalId) {\n    rental_id\n    total_price\n    rental_days\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}"): (typeof documents)["query getUsers {\n  allUsers {\n    email\n    id\n    name\n  }\n}"];
+export function graphql(source: "mutation updatePaymentMethod($input: CreateRentalInput!, $rentalId: Int!) {\n  updateRental(input: $input, rental_id: $rentalId) {\n    rental_id\n    paymentMethod {\n      name\n      payment_id\n    }\n    customer {\n      customer_id\n      email\n    }\n  }\n}"): (typeof documents)["mutation updatePaymentMethod($input: CreateRentalInput!, $rentalId: Int!) {\n  updateRental(input: $input, rental_id: $rentalId) {\n    rental_id\n    paymentMethod {\n      name\n      payment_id\n    }\n    customer {\n      customer_id\n      email\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query sayHello {\n  hello\n}"): (typeof documents)["query sayHello {\n  hello\n}"];
+export function graphql(source: "mutation updateRental($rentalId: Int!, $input: CreateRentalInput!) {\n  updateRental(rental_id: $rentalId, input: $input) {\n    rental_days\n    total_price\n  }\n}"): (typeof documents)["mutation updateRental($rentalId: Int!, $input: CreateRentalInput!) {\n  updateRental(rental_id: $rentalId, input: $input) {\n    rental_days\n    total_price\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getCars {\n  cars {\n    availability\n    brand\n    car_id\n    category\n    description\n    fuel_type\n    mileage\n    model\n    model_year\n    price_per_day\n    seats\n  }\n}"): (typeof documents)["query getCars {\n  cars {\n    availability\n    brand\n    car_id\n    category\n    description\n    fuel_type\n    mileage\n    model\n    model_year\n    price_per_day\n    seats\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Customer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    customer_id\n    name\n    email\n    phone_number\n    postCode\n    address\n    suburb\n    state\n    country\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model_year\n        model\n      }\n    }\n  }\n}"): (typeof documents)["query Customer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    customer_id\n    name\n    email\n    phone_number\n    postCode\n    address\n    suburb\n    state\n    country\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model_year\n        model\n      }\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getRentalsOfCustomer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model\n        model_year\n        price_per_day\n      }\n    }\n  }\n}"): (typeof documents)["query getRentalsOfCustomer($customerId: Int!) {\n  customer(customer_id: $customerId) {\n    rentals {\n      rental_id\n      rental_days\n      total_price\n      car {\n        brand\n        car_id\n        model\n        model_year\n        price_per_day\n      }\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

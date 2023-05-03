@@ -1,0 +1,16 @@
+query getRentalsOfCustomer($customerId: Int!) {
+  customer(customer_id: $customerId) {
+    rentals {
+      rental_id
+      rental_days
+      total_price
+      car {
+        brand
+        car_id
+        model
+        model_year
+        price_per_day
+      }
+    }
+  }
+}

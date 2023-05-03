@@ -1,0 +1,15 @@
+query getCars {
+  cars {
+    availability
+    brand
+    car_id
+    category
+    description
+    fuel_type
+    mileage
+    model
+    model_year
+    price_per_day
+    seats
+  }
+}

@@ -1,0 +1,12 @@
+[
+  { "payment_id": 1, "name": "Credit Card" },
+  { "payment_id": 2, "name": "Debit Card" },
+  { "payment_id": 3, "name": "PayPal" },
+  { "payment_id": 4, "name": "Apple Pay" },
+  { "payment_id": 5, "name": "Google Pay" },
+  { "payment_id": 6, "name": "AliPay" },
+  { "payment_id": 7, "name": "WeChat Pay" },
+  { "payment_id": 8, "name": "Venmo" },
+  { "payment_id": 9, "name": "Cash" },
+  { "payment_id": 10, "name": "Check" }
+]

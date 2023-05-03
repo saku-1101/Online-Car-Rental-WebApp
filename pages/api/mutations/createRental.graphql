@@ -1,0 +1,14 @@
+mutation CreateRental($input: CreateRentalInput!) {
+  createRental(input: $input) {
+    rental_id
+    rental_days
+    total_price
+    car {
+      brand
+      car_id
+      model
+      model_year
+      price_per_day
+    }
+  }
+}
