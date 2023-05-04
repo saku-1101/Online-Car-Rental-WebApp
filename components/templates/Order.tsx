@@ -7,11 +7,13 @@ import paymentData from '../../prisma/data/payment.json';
 import { UpdatePaymentMethodDocument } from '@@/pages/api/front/generated/graphql';
 import { useRouter } from 'next/router';
 import { Rental } from '@@/hooks/types/rentalContextTypes';
+import { useRentalsContext } from '@@/hooks/useRentalContext';
 
 // TODO:Then, checkout
 
 export default function Order() {
-  const { customerId, handleSetCustomerId } = useCustomerContext();
+  const { customerId } = useCustomerContext();
+  const { HandleDeleteRentals } = useRentalsContext();
   const { data, loading, error } = useQuery(CustomerDocument, { variables: { customerId }, pollInterval: 1000 });
   const [paymentId, setPaymentId] = useState<number>(0);
   const [updatePaymentMethodFunc] = useMutation(UpdatePaymentMethodDocument);
@@ -40,7 +42,8 @@ export default function Order() {
   };
   const checkOut = async () => {
     await handleChangePaymentMethod(data.customer!.rentals as Rental[]);
-    sessionStorage.clear(); // sessionStorageの消去
+    HandleDeleteRentals([]); // rentals sessionStorageの消去
+    sessionStorage.clear(); // 残りsessionStorageの消去
 
     router.push('/thankyou');
   };
