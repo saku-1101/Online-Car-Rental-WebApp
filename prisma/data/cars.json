@@ -10,7 +10,8 @@
     "fuel_type": "Gas",
     "seats": 5,
     "price_per_day": 45.0,
-    "description": "Comfortable and fuel-efficient"
+    "description": "Comfortable and fuel-efficient",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Civic.jpg?t=2023-05-04T07%3A50%3A05.981Z"
   },
   {
     "car_id": 2,
@@ -23,7 +24,8 @@
     "fuel_type": "Gas",
     "seats": 5,
     "price_per_day": 60.0,
-    "description": "Spacious and versatile"
+    "description": "Spacious and versatile",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/320i.jpg?t=2023-05-04T07%3A24%3A10.005Z"
   },
   {
     "car_id": 3,
@@ -36,7 +38,8 @@
     "fuel_type": "Gas",
     "seats": 4,
     "price_per_day": 80.0,
-    "description": "Off-road capable and fun to drive"
+    "description": "Off-road capable and fun to drive",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Sonata.jpg"
   },
   {
     "car_id": 4,
@@ -49,7 +52,8 @@
     "fuel_type": "Hybrid",
     "seats": 5,
     "price_per_day": 50.0,
-    "description": "Fuel-efficient and comfortable ride"
+    "description": "Fuel-efficient and comfortable ride",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Camry.jpg"
   },
   {
     "car_id": 5,
@@ -62,7 +66,8 @@
     "fuel_type": "Gas",
     "seats": 7,
     "price_per_day": 70.0,
-    "description": "Spacious family car"
+    "description": "Spacious family car",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Jimny.jpg?t=2023-05-04T07%3A54%3A05.221Z"
   },
   {
     "car_id": 6,
@@ -75,7 +80,8 @@
     "fuel_type": "Gas",
     "seats": 5,
     "price_per_day": 55.0,
-    "description": "Sporty and stylish sedan"
+    "description": "Sporty and stylish sedan",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/GLC.jpg?t=2023-05-04T07%3A54%3A31.544Z"
   },
   {
     "car_id": 7,
@@ -88,7 +94,8 @@
     "fuel_type": "Diesel",
     "seats": 5,
     "price_per_day": 75.0,
-    "description": "Comfortable and safe"
+    "description": "Comfortable and safe",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Cherokee.jpg"
   },
   {
     "car_id": 8,
@@ -101,7 +108,8 @@
     "fuel_type": "Hybrid",
     "seats": 5,
     "price_per_day": 65.0,
-    "description": "Spacious and efficient family SUV"
+    "description": "Spacious and efficient family SUV",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Captiva.jpg"
   },
   {
     "car_id": 9,
@@ -114,7 +122,8 @@
     "fuel_type": "Gas",
     "seats": 5,
     "price_per_day": 90.0,
-    "description": "Luxury and versatility combined"
+    "description": "Luxury and versatility combined",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/X-trail.jpg"
   },
   {
     "car_id": 10,
@@ -127,6 +136,7 @@
     "fuel_type": "Diesel",
     "seats": 5,
     "price_per_day": 80.0,
-    "description": "Sophisticated and sporty"
+    "description": "Sophisticated and sporty",
+    "url": "https://gezppbgltyvlcrtttjwf.supabase.co/storage/v1/object/public/assets-carRental/assets/Golf.jpg"
   }
 ]

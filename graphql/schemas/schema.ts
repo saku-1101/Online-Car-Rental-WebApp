@@ -25,6 +25,7 @@ export const schema = gql`
     seats: Int!
     price_per_day: Float!
     description: String!
+    url: String!
     rentals: [Rental!] # nullable
   }
 
@@ -65,6 +66,7 @@ export const schema = gql`
     seats: Int!
     price_per_day: Float!
     description: String!
+    url: String!
   }
 
   input CreatePaymentInput {

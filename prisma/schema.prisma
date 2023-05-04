@@ -32,7 +32,8 @@ model Car {
   fuel_type        String
   seats        Int
   price_per_day Float
-  description String
+  description        String
+  url        String
 
   rentals      Rental[]
 }
