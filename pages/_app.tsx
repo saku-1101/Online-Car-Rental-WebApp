@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 // Apollo Clientは現段階ではpages配下でしか呼び出せない模様
 export default function App({ Component, pageProps }: AppProps) {
   // 初回レンダリング前にsessionStorageをサーバが読めるようにしておく
+  const [firstLoaded, setFirstLoaded] = usePersistedState<Boolean>({ key: 'firstLoaded', initialValue: true });
   const [customerId, setCustomerId] = usePersistedState<number>({ key: 'customerId', initialValue: 0 });
   const [rentals, setRentals] = usePersistedState<Rental[]>({ key: 'rentals', initialValue: [] });
   useEffect(() => {
