@@ -1,12 +1,12 @@
 import { createContext, useCallback, useContext } from 'react';
 import { usePersistedState } from './usePersistedState';
 import React from 'react';
-import { Rental, Funk, RentalsContextType } from './types/rentalContextTypes';
+import { Rental, RentalsContextType } from './types/rentalContextTypes';
 
 const RentalsContextTypeDefaultValue = {
   rentals: [],
-  HandleSetRentals: (rental: Rental) => [],
-  HandleDeleteRentals: (rental: Rental[]) => [],
+  HandleSetRentals: (newRentals: Rental[]) => [],
+  HandleDeleteRentals: (deletedRentals: Rental[]) => [],
 };
 
 type RentalsProviderProps = {
@@ -20,15 +20,16 @@ export const useRentalsContext = () => {
 }; // contextを使う側へのエクスポート
 
 export const RentalsProvider = ({ children }: RentalsProviderProps) => {
-  const [rentals, setRentals] = usePersistedState<Rental[] | Funk<Rental[]>>({
+  const [rentals, setRentals] = usePersistedState<Rental[]>({
     key: 'rentals',
-    initialValue: [],
+    initialValue: [] as Rental[],
   });
-  const HandleSetRentals = useCallback((rental: Rental) => {
-    setRentals((prevRentals) => [...prevRentals, rental]);
+
+  const HandleSetRentals = useCallback((newRentals: Rental[]) => {
+    setRentals(newRentals);
   }, []);
-  const HandleDeleteRentals = useCallback((newRentals: Rental[]) => {
-    setRentals((prevRentals) => prevRentals.filter((r) => newRentals.includes(r)));
+  const HandleDeleteRentals = useCallback((deletedRentals: Rental[]) => {
+    setRentals(deletedRentals);
   }, []);
   const useStateToUseRentalsContext = { rentals, HandleSetRentals, HandleDeleteRentals };
 
