@@ -21,8 +21,10 @@ export default function DeleteOrderButton(props: { deleteRental: (rentalId: numb
   }
 
   return (
-    <button className='btn btn-primary' onClick={() => HandleDelete()}>
-      Delete
-    </button>
+    <>
+      <button className='btn btn-primary' onClick={() => HandleDelete()}>
+        Delete
+      </button>
+    </>
   );
 }

@@ -16,8 +16,6 @@ export default function Cart() {
   const router = useRouter();
   const { customerId } = useCustomerContext();
   const { rentals, HandleSetRentals, HandleDeleteRentals } = useRentalsContext(); // fetch from localstrage
-  // const [rs, setRs] = useState<Rental[]>([]); // ローカルストレージの値を細かく変えるのが手間なので、一旦stateに入れる
-  // useLayoutEffect(() => {}, [rentals]);
 
   // change total_price when the user changes the rental days
   const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
@@ -34,9 +32,6 @@ export default function Cart() {
 
   // Delete a rental from the UI and localstorage
   const deleteRental = (rental_id: number) => {
-    // let afterDeleteRentals = rentals;
-    // afterDeleteRentals = (afterDeleteRentals as Rental[]).filter((rental) => rental.rental_id !== rental_id);
-    // delete from localstorage
     HandleDeleteRentals(passToHandleDeleteRentals(rental_id));
   };
 
