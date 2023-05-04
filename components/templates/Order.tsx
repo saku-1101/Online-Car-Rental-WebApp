@@ -21,11 +21,6 @@ export default function Order() {
   if (error) return <p>Error</p>;
   if (!data || !data.customer) return <p>No data</p>;
 
-  const handleSetPaymentId = () => {
-    return (e: any) => {
-      setPaymentId(Number(e.target.value));
-    };
-  };
   const handleChangePaymentMethod = async (rentals: Rental[]) => {
     for (const rental of rentals) {
       console.log(rental.car!.car_id, customerId, paymentId, rental.rental_days);
@@ -45,9 +40,7 @@ export default function Order() {
   };
   const checkOut = async () => {
     await handleChangePaymentMethod(data.customer!.rentals as Rental[]);
-    // HandleDeleteRentals([]); // rentals ローカルストレージデータの消去
-    // handleSetCustomerId(0); // customerID ローカルストレージデータのリセット
-    sessionStorage.clear(); // 残りローカルストレージデータの消去
+    sessionStorage.clear(); // sessionStorageの消去
 
     router.push('/thankyou');
   };
@@ -120,7 +113,13 @@ export default function Order() {
           <div className='divider'>Payment Method</div>
         </div>
 
-        <select className='select select-accent w-full max-w-xs' onChange={() => handleSetPaymentId}>
+        <select
+          className='select select-accent w-full max-w-xs'
+          onChange={(e: any) => {
+            setPaymentId(Number(e.target.value));
+            console.log(e.target.value);
+          }}
+        >
           <option disabled selected>
             Select the payment method
           </option>
