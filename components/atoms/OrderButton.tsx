@@ -37,7 +37,7 @@ export default function OrderButton(props: { label: string; car: Car }) {
       <button
         disabled={props.car.availability ? false : true}
         className='btn btn-primary'
-        onClick={(e: any) => AddOrderHandler()}
+        onClick={() => AddOrderHandler()}
       >
         {props.label}
       </button>
