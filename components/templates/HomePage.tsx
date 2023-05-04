@@ -27,7 +27,7 @@ export default function Home() {
             Welcome to <span className='text-secondary'>Hertz Car Store</span>!
           </h1>
           <p className='py-6'>
-            🌸 We're happy to be here to help you with an extraordinary online-shopping experience! <br></br>
+            🌸 We&apos;re happy to be here to help you with an extraordinary online-shopping experience! <br></br>
             Start your shopping from the entrance below!
           </p>
         </div>

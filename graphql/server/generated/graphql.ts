@@ -34,6 +34,7 @@ export type Car = {
 export type CreateCarInput = {
   availability: Scalars['Boolean'];
   brand: Scalars['String'];
+  category: Scalars['String'];
   description: Scalars['String'];
   fuel_type: Scalars['String'];
   mileage: Scalars['Int'];

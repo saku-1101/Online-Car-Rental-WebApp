@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import Link from 'next/link';
 import { useRentalsContext } from '@@/hooks/useRentalContext';
+import { Rental } from '@@/hooks/types/rentalContextTypes';
 
 export default function DraggableCart() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -16,7 +17,7 @@ export default function DraggableCart() {
   // useEffectでlocalstorageに保存されているrentalsを取得
   useEffect(() => {
     const items = rentals.length;
-    const nameOfCars: string[] = rentals.map((rental) => {
+    const nameOfCars: string[] = (rentals as Rental[]).map((rental) => {
       return rental.car?.brand || '';
     });
     setReactives({ items: items, nameOfCars: nameOfCars });

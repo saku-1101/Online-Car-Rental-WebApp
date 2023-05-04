@@ -1,23 +1,21 @@
 import PageTitle from '../atoms/PageTitle';
-import OrderDetails from '../atoms/OrderDetails';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCustomerContext } from '@@/hooks/useCustomerContext';
 import { useMutation, useQuery } from '@apollo/client';
 import { CustomerDocument } from '@@/pages/api/front/generated/graphql';
 import paymentData from '../../prisma/data/payment.json';
 import { UpdatePaymentMethodDocument } from '@@/pages/api/front/generated/graphql';
 import { useRouter } from 'next/router';
+import { Rental } from '@@/hooks/types/rentalContextTypes';
 import { useRentalsContext } from '@@/hooks/useRentalContext';
-import { usePersistedState } from '@@/hooks/usePersistedState';
-import Footer from '@@/components/atoms/Footer';
 
 // TODO:Then, checkout
 
 export default function Order() {
-  const { customerId, handleSetCustomerId } = useCustomerContext();
-  const { rentals, HandleDeleteRentals } = useRentalsContext();
+  const { customerId } = useCustomerContext();
+  const { HandleDeleteRentals } = useRentalsContext();
   const { data, loading, error } = useQuery(CustomerDocument, { variables: { customerId }, pollInterval: 1000 });
-  const [paymentId, setPaymentId] = useState(0);
+  const [paymentId, setPaymentId] = useState<number>(0);
   const [updatePaymentMethodFunc] = useMutation(UpdatePaymentMethodDocument);
   const router = useRouter();
 
@@ -25,28 +23,28 @@ export default function Order() {
   if (error) return <p>Error</p>;
   if (!data || !data.customer) return <p>No data</p>;
 
-  const handleSetPaymentId = () => {
-    return (e: any) => {
-      setPaymentId(e.target.value);
-    };
-  };
-
-  const checkOut = async () => {
-    const res = await updatePaymentMethodFunc({
-      variables: {
-        input: {
-          car_id: 4,
-          customer_id: 13,
-          payment_id: 3,
-          rental_days: 4,
+  const handleChangePaymentMethod = async (rentals: Rental[]) => {
+    for (const rental of rentals) {
+      console.log(rental.car!.car_id, customerId, paymentId, rental.rental_days);
+      const res = await updatePaymentMethodFunc({
+        variables: {
+          input: {
+            car_id: rental.car!.car_id,
+            customer_id: customerId,
+            payment_id: paymentId,
+            rental_days: rental.rental_days,
+          },
+          rentalId: rental.rental_id,
         },
-        rentalId: 78,
-      },
-    });
-    HandleDeleteRentals([]); // rentals ローカルストレージデータの消去
-    handleSetCustomerId(0); // customerID ローカルストレージデータのリセット
-    localStorage.clear(); // 残りローカルストレージデータの消去
-    console.log(res, rentals, customerId);
+      });
+      console.log(res, rental, customerId);
+    }
+  };
+  const checkOut = async () => {
+    await handleChangePaymentMethod(data.customer!.rentals as Rental[]);
+    HandleDeleteRentals([]); // rentals sessionStorageの消去
+    sessionStorage.clear(); // 残りsessionStorageの消去
+
     router.push('/thankyou');
   };
 
@@ -118,13 +116,19 @@ export default function Order() {
           <div className='divider'>Payment Method</div>
         </div>
 
-        <select className='select select-accent w-full max-w-xs'>
+        <select
+          className='select select-accent w-full max-w-xs'
+          onChange={(e: any) => {
+            setPaymentId(Number(e.target.value));
+            console.log(e.target.value);
+          }}
+        >
           <option disabled selected>
             Select the payment method
           </option>
           {paymentData.map((payment) => {
             return (
-              <option key={payment.payment_id} value={payment.payment_id} onChange={handleSetPaymentId()}>
+              <option key={payment.payment_id} value={payment.payment_id}>
                 {payment.name}
               </option>
             );
