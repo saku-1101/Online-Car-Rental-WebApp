@@ -16,6 +16,7 @@ export default function Cart() {
   const router = useRouter();
   const { customerId } = useCustomerContext();
   const { rentals, HandleSetRentals, HandleDeleteRentals } = useRentalsContext(); // fetch from localstrage
+  const [selected, setSelected] = useState(true);
 
   ///// Prevent Hydration Error
   const [hasMounted, setHasMounted] = useState(false);
@@ -30,6 +31,7 @@ export default function Cart() {
   const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
     const updatedRental = (rentals as Rental[]).map((rental) => {
       if (rental.rental_id === rental_id) {
+        console.log('here');
         return { ...rental, total_price: fee, rental_days: days };
       } else {
         return rental;
@@ -37,6 +39,7 @@ export default function Cart() {
     });
     const updatedRentalObject = updatedRental.find((rental) => rental.rental_id === rental_id);
     HandleSetRentals(passToHandleRentals(updatedRentalObject as Rental));
+    setSelected(false);
   };
 
   // Delete a rental from the UI and localstorage
@@ -63,7 +66,6 @@ export default function Cart() {
   };
   const handleOnclick = async () => {
     await updateRental(rentals as Rental[]);
-    console.log('Everything is updated');
     router.push('/order');
   };
 
@@ -87,7 +89,7 @@ export default function Cart() {
       <div className='w-full flex flex-row justify-center gap-10'>
         <OrderDetails />
         {/* rentalの日付やtotal金額などをアプデした後にリンクに飛ぶ */}
-        <button className='btn btn-secondary' onClick={() => handleOnclick()}>
+        <button disabled={selected} className='btn btn-secondary' onClick={() => handleOnclick()}>
           Confirm your Order
         </button>
       </div>

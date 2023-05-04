@@ -16,6 +16,7 @@ export default function Order() {
   const { HandleDeleteRentals } = useRentalsContext();
   const { data, loading, error } = useQuery(CustomerDocument, { variables: { customerId }, pollInterval: 1000 });
   const [paymentId, setPaymentId] = useState<number>(0);
+  const [disabled, setDisabled] = useState(true);
   const [updatePaymentMethodFunc] = useMutation(UpdatePaymentMethodDocument);
   const router = useRouter();
 
@@ -41,6 +42,7 @@ export default function Order() {
     }
   };
   const checkOut = async () => {
+    setDisabled(true);
     await handleChangePaymentMethod(data.customer!.rentals as Rental[]);
     HandleDeleteRentals([]); // rentals sessionStorageの消去
     sessionStorage.clear(); // 残りsessionStorageの消去
@@ -120,7 +122,7 @@ export default function Order() {
           className='select select-accent w-full max-w-xs'
           onChange={(e: any) => {
             setPaymentId(Number(e.target.value));
-            console.log(e.target.value);
+            setDisabled(false);
           }}
         >
           <option disabled selected>
@@ -136,7 +138,7 @@ export default function Order() {
         </select>
 
         <div className='w-full flex flex-row justify-center my-5'>
-          <button className='btn btn-secondary' onClick={() => checkOut()}>
+          <button disabled={disabled} className='btn btn-secondary' onClick={() => checkOut()}>
             Checkout
           </button>
         </div>
