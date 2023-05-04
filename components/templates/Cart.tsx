@@ -17,6 +17,15 @@ export default function Cart() {
   const { customerId } = useCustomerContext();
   const { rentals, HandleSetRentals, HandleDeleteRentals } = useRentalsContext(); // fetch from localstrage
 
+  ///// Prevent Hydration Error
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
   // change total_price when the user changes the rental days
   const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
     const updatedRental = (rentals as Rental[]).map((rental) => {
