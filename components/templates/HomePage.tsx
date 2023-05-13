@@ -11,7 +11,6 @@ export default function Home() {
   // so if the page is reloaded, it won't redirect to /registration once you've already been there
   const [firstLoaded, setFirstLoaded] = usePersistedState<Boolean>({ key: 'firstLoaded', initialValue: true });
   useEffect(() => {
-    console.log(firstLoaded);
     if (firstLoaded) {
       router.push('/registration');
       setFirstLoaded(false);

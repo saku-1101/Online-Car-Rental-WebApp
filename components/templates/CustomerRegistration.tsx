@@ -53,7 +53,6 @@ export default function CustomerRegistration() {
         },
       },
     });
-    console.log('Successfully registered! Customer ID is:', res.data?.createCustomer.customer_id);
     const customerId = res.data?.createCustomer.customer_id;
     customerId !== undefined ? handleSetCustomerId(customerId) : router.push('/registration-failed');
     router.push('/');

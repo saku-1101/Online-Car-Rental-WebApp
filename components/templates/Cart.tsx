@@ -31,7 +31,6 @@ export default function Cart() {
   const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
     const updatedRental = (rentals as Rental[]).map((rental) => {
       if (rental.rental_id === rental_id) {
-        console.log('here');
         return { ...rental, total_price: fee, rental_days: days };
       } else {
         return rental;
@@ -61,7 +60,6 @@ export default function Cart() {
           },
         },
       });
-      console.log(res);
     }
   };
   const handleOnclick = async () => {

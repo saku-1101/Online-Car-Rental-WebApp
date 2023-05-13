@@ -32,7 +32,6 @@ export default function DraggableCart() {
   const handleClick = () => {
     router.push('/cart');
   };
-  console.log(reactives);
 
   return (
     <Draggable disabled={isMobile}>

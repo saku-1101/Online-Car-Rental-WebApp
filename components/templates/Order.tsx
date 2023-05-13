@@ -26,7 +26,6 @@ export default function Order() {
 
   const handleChangePaymentMethod = async (rentals: Rental[]) => {
     for (const rental of rentals) {
-      console.log(rental.car!.car_id, customerId, paymentId, rental.rental_days);
       const res = await updatePaymentMethodFunc({
         variables: {
           input: {
@@ -38,7 +37,6 @@ export default function Order() {
           rentalId: rental.rental_id,
         },
       });
-      console.log(res, rental, customerId);
     }
   };
   const checkOut = async () => {
