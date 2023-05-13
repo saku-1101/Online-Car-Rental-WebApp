@@ -1,7 +1,9 @@
 import { Rental } from '@@/hooks/types/rentalContextTypes';
-export default function OrderDetails(props: { rentals: Rental[] }) {
-  const selectedItems: number = props.rentals.length;
-  const selectedTotal: number = props.rentals.reduce((acc: number, cur: Rental): number => {
+import { useRentalsContext } from '@@/hooks/useRentalContext';
+export default function OrderDetails() {
+  const { rentals } = useRentalsContext();
+  const selectedItems: number = rentals.length;
+  const selectedTotal: number = rentals.reduce((acc: number, cur: Rental): number => {
     return acc + cur.total_price;
   }, 0);
   return (

@@ -10,11 +10,11 @@ type Result<T> = readonly [T, (v: T) => void];
 export const usePersistedState = <T>({ key, initialValue }: Props<T>): Result<T> => {
   const getItemFromStorage = <T>(key: string, defaultValue?: T) => {
     try {
-      const val = JSON.parse(localStorage.getItem(key) + '');
+      const val = JSON.parse(sessionStorage.getItem(key) + '');
       if (val !== null) {
         return val;
       }
-      return localStorage.setItem(key, JSON.stringify(defaultValue));
+      return sessionStorage.setItem(key, JSON.stringify(defaultValue));
     } catch {
       return defaultValue;
     }
@@ -24,7 +24,7 @@ export const usePersistedState = <T>({ key, initialValue }: Props<T>): Result<T>
 
   const setValue = useCallback(
     (value: T) => {
-      localStorage.setItem(key, JSON.stringify(value));
+      sessionStorage.setItem(key, JSON.stringify(value));
       setState(value);
     },
     [key],

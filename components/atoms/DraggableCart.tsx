@@ -1,45 +1,42 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import Link from 'next/link';
 import { useRentalsContext } from '@@/hooks/useRentalContext';
+import { Rental } from '@@/hooks/types/rentalContextTypes';
+import { isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
 
 export default function DraggableCart() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const buttonRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const router = useRouter();
 
   // TODO: 車が追加された瞬間にカートの中身を更新しなけれはならない or Loading が出る
   type cartDatatype = { items: number; nameOfCars: string[] };
-  const [reactives, setReactives] = useState<cartDatatype>({} as cartDatatype);
+  // localstorageに保存されているrentalsをカート用に加工したものを保存
+  const [reactives, setReactives] = useState<cartDatatype>({} as cartDatatype); // 型アサーション:コンパイラの型推論を上書きする
+  // localstorageに保存されているrentalsを取得
   const { rentals } = useRentalsContext();
 
-  // localstorageに保存されているrentals(以前の値を保持)とサーバ側の値が違うのでhidrationエラーが出る
-  // useEffectでlocalstorageに保存されているrentalsを取得
   useEffect(() => {
+    // ***detect mobile ***//
+    if (window.innerWidth <= 800) setIsMobile(true);
+
+    // ***handle rental state in cart***//
     const items = rentals.length;
-    const nameOfCars: string[] = rentals.map((rental) => {
+    const nameOfCars: string[] = (rentals as Rental[]).map((rental) => {
       return rental.car?.brand || '';
     });
     setReactives({ items: items, nameOfCars: nameOfCars });
   }, [rentals]);
 
-  // the number of cars added to the cart
-  // ***********************from here*************************//
-
-  const handleDrag = (e: any, ui: any) => {
-    const { x, y } = ui;
-    setPosition({
-      x: x,
-      y: y,
-    });
+  const handleClick = () => {
+    router.push('/cart');
   };
 
   return (
-    <Draggable onDrag={handleDrag} position={position} nodeRef={buttonRef}>
-      <div
-        ref={buttonRef}
-        className='dropdown dropdown-top dropdown-left rounded-full flex-none fixed right-0 bottom-0 mr-4 mb-4 bg-white border shadow-sm text-2xl z-20'
-      >
-        <label tabIndex={1} className='btn btn-ghost btn-circle'>
+    <Draggable disabled={isMobile}>
+      <div className='dropdown dropdown-top dropdown-left rounded-full flex-none fixed right-0 bottom-0 mr-4 mb-4 bg-white border shadow-sm text-2xl z-20'>
+        <label tabIndex={1} className='btn btn-ghost btn-circle '>
           <div className='indicator'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -70,12 +67,15 @@ export default function DraggableCart() {
             })}
 
             <div className='card-actions'>
-              <Link href={{ pathname: '/cart' }}>
-                <button className='btn btn-primary btn-block'>View cart</button>
-              </Link>
+              <button
+                disabled={isEmpty(reactives) ? false : true}
+                onClick={() => handleClick()}
+                className='btn btn-primary btn-block'
+              >
+                View cart
+              </button>
             </div>
           </div>
-          ∑
         </div>
       </div>
     </Draggable>

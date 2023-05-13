@@ -26,6 +26,7 @@ CREATE TABLE "Car" (
     "seats" INTEGER NOT NULL,
     "price_per_day" DOUBLE PRECISION NOT NULL,
     "description" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
 
     CONSTRAINT "Car_pkey" PRIMARY KEY ("car_id")
 );

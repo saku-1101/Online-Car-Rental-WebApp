@@ -6,7 +6,7 @@ export default function ProductCard(props: { car: Car; button: string }) {
     <>
       <div className='card card-compact w-full aspect-square bg-base-100 shadow-xl p-0'>
         <figure className='w-full h-3/4'>
-          {/* <img src={props.product.url} alt='' className='object-cover w-full h-full' /> */}
+          <img src={props.car.url} alt='' className='object-cover w-full h-full' />
         </figure>
         <div className='card-body'>
           <h2 className='card-title text-neutral-focus'>

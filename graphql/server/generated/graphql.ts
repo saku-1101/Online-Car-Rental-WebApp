@@ -29,11 +29,13 @@ export type Car = {
   price_per_day: Scalars['Float'];
   rentals?: Maybe<Array<Rental>>;
   seats: Scalars['Int'];
+  url: Scalars['String'];
 };
 
 export type CreateCarInput = {
   availability: Scalars['Boolean'];
   brand: Scalars['String'];
+  category: Scalars['String'];
   description: Scalars['String'];
   fuel_type: Scalars['String'];
   mileage: Scalars['Int'];
@@ -41,6 +43,7 @@ export type CreateCarInput = {
   model_year: Scalars['Int'];
   price_per_day: Scalars['Float'];
   seats: Scalars['Int'];
+  url: Scalars['String'];
 };
 
 export type CreateCustomerInput = {
@@ -326,6 +329,7 @@ export type CarResolvers<ContextType = any, ParentType extends ResolversParentTy
   price_per_day?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   rentals?: Resolver<Maybe<Array<ResolversTypes['Rental']>>, ParentType, ContextType>;
   seats?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

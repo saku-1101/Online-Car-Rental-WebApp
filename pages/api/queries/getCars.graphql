@@ -11,5 +11,6 @@ query getCars {
     model_year
     price_per_day
     seats
+    url
   }
 }
