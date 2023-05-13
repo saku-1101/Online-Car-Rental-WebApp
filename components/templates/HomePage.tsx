@@ -21,7 +21,9 @@ export default function Home() {
   return (
     <div className='hero w-full h-full'>
       <div className='hero-content flex-col justify-center gap-5'>
-        <Image src={logo} alt='' className='max-w-sm rounded-lg' />
+        <div className='lg:w-1/2 w-full'>
+          <Image src={logo} alt='' width={0} height={0} /> {/* nextが自動でサイズを最適化してくれる */}
+        </div>
         <div>
           <h1 className='text-5xl font-bold'>
             Welcome to <span className='text-secondary'>Hertz Car Store</span>!
