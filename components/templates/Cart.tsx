@@ -31,7 +31,6 @@ export default function Cart() {
   const changeSubTotalAndDays = (rental_id: number, fee: number, days: number) => {
     const updatedRental = (rentals as Rental[]).map((rental) => {
       if (rental.rental_id === rental_id) {
-        console.log('here');
         return { ...rental, total_price: fee, rental_days: days };
       } else {
         return rental;
@@ -61,20 +60,18 @@ export default function Cart() {
           },
         },
       });
-      console.log(res);
     }
   };
   const handleOnclick = async () => {
+    setSelected(true);
     await updateRental(rentals as Rental[]);
     router.push('/order');
   };
 
-  if (loading) return <p>Loading...</p>;
-
   return (
-    <div className='flex flex-col justify-center gap-10'>
+    <div className='flex flex-col justify-between content-center'>
       <PageTitle title='Your Cart' />
-      <div className='flex justify-center'>
+      <div className='flex justify-center items-around'>
         <div className='w-3/4 grid grid-cols-1 lg:grid-cols-3 gap-10'>
           {(rentals as Rental[]).map((rental: Rental) => (
             <OrderCard
@@ -86,10 +83,10 @@ export default function Cart() {
           ))}
         </div>
       </div>
-      <div className='w-full flex flex-row justify-center gap-10'>
+      <div className='flex lg:flex-row lg:justify-center flex-col items-center my-10'>
         <OrderDetails />
         {/* rentalの日付やtotal金額などをアプデした後にリンクに飛ぶ */}
-        <button disabled={selected} className='btn btn-secondary' onClick={() => handleOnclick()}>
+        <button disabled={selected} className='btn btn-secondary my-10' onClick={() => handleOnclick()}>
           Confirm your Order
         </button>
       </div>

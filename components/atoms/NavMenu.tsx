@@ -17,6 +17,9 @@ export default function NavMenu() {
         </label>
         <ul tabIndex={0} className='menu dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box'>
           <li>
+            <Link href={{ pathname: '/registration' }}>Register</Link>
+          </li>
+          <li>
             <Link href={{ pathname: '/' }}>Home</Link>
           </li>
           <li>

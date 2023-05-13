@@ -20,7 +20,6 @@ export default function OrderButton(props: { label: string; car: Car }) {
         },
       },
     });
-    console.log(res.data?.createRental);
 
     // add rental to localstorage
     // 複数のコンポーネントで同時に処理すると，localstorageの値が更新されない！

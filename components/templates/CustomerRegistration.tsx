@@ -53,7 +53,6 @@ export default function CustomerRegistration() {
         },
       },
     });
-    console.log('Successfully registered! Customer ID is:', res.data?.createCustomer.customer_id);
     const customerId = res.data?.createCustomer.customer_id;
     customerId !== undefined ? handleSetCustomerId(customerId) : router.push('/registration-failed');
     router.push('/');
@@ -64,7 +63,7 @@ export default function CustomerRegistration() {
 
   return (
     <>
-      <div className='w-screen h-screen flex flex-col items-center justify-center gap-6'>
+      <div className='w-screen h-screen flex flex-col items-center justify-between px-10'>
         <PageTitle title='Register before you proceed!' />
         <div className='form-control w-full max-w-md align-middle'>
           <label className='label'>
@@ -78,36 +77,34 @@ export default function CustomerRegistration() {
             className='input input-bordered w-full max-w-md'
           />
         </div>
-        <div className='w-full max-w-md flex flex-row gap-2'>
+
+        <div className='w-full max-w-md flex md:flex-row md:justify-between flex-col content-between'>
           <div className='form-control'>
-            <div className='basis-1/2 flex flex-col'>
-              <label className='label'>
-                <span className='label-text'>Post Address</span>
-                <span className='label-text-alt text-error'>*</span>
-              </label>
-              <input
-                type='text'
-                onChange={handleSetState('post')}
-                placeholder='Type here'
-                className='input input-bordered max-w-md'
-              />
-            </div>
+            <label className='label'>
+              <span className='label-text'>Post Address</span>
+              <span className='label-text-alt text-error'>*</span>
+            </label>
+            <input
+              type='text'
+              onChange={handleSetState('post')}
+              placeholder='Type here'
+              className='input input-bordered w-full max-w-md'
+            />
           </div>
           <div className='form-control'>
-            <div className='basis-1/2 flex flex-col'>
-              <label className='label'>
-                <span className='label-text'>Address</span>
-                <span className='label-text-alt text-error'>*</span>
-              </label>
-              <input
-                type='text'
-                onChange={handleSetState('address')}
-                placeholder='Type here'
-                className='input input-bordered max-w-md'
-              />
-            </div>
+            <label className='label'>
+              <span className='label-text'>Address</span>
+              <span className='label-text-alt text-error'>*</span>
+            </label>
+            <input
+              type='text'
+              onChange={handleSetState('address')}
+              placeholder='Type here'
+              className='input input-bordered w-full max-w-md'
+            />
           </div>
         </div>
+
         <div className='w-full max-w-md flex flex-row gap-2'>
           <div className='form-control'>
             <label className='label'>
@@ -146,6 +143,7 @@ export default function CustomerRegistration() {
             />
           </div>
         </div>
+
         <div className='form-control w-full max-w-md'>
           <label className='label'>
             <span className='label-text'>Phone</span>

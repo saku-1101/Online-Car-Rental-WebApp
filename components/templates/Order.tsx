@@ -20,13 +20,12 @@ export default function Order() {
   const [updatePaymentMethodFunc] = useMutation(UpdatePaymentMethodDocument);
   const router = useRouter();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  if (!data || !data.customer) return <p>No data</p>;
+  if (loading) return <p className='w-screen h-screen'>Loading...</p>;
+  if (error) return <p className='w-screen h-screen'>Error</p>;
+  if (!data || !data.customer) return <p className='w-screen h-screen'>No data</p>;
 
   const handleChangePaymentMethod = async (rentals: Rental[]) => {
     for (const rental of rentals) {
-      console.log(rental.car!.car_id, customerId, paymentId, rental.rental_days);
       const res = await updatePaymentMethodFunc({
         variables: {
           input: {
@@ -38,7 +37,6 @@ export default function Order() {
           rentalId: rental.rental_id,
         },
       });
-      console.log(res, rental, customerId);
     }
   };
   const checkOut = async () => {

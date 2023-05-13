@@ -28,7 +28,6 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
   });
   const handleSetCustomerId = (customerId: number) => {
     setCustomerId(customerId);
-    console.log(customerId);
   };
   const useStateToUseCustomerContext = { customerId, handleSetCustomerId };
 
