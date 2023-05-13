@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { useRentalsContext } from '@@/hooks/useRentalContext';
 import { Rental } from '@@/hooks/types/rentalContextTypes';
@@ -6,10 +6,10 @@ import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 
 export default function DraggableCart() {
+  const [isMobile, setIsMobile] = useState(false);
+
   const router = useRouter();
-  // domにアクセスするためのref
-  const buttonRef = useRef(null);
-  console.log(buttonRef);
+
   // TODO: 車が追加された瞬間にカートの中身を更新しなけれはならない or Loading が出る
   type cartDatatype = { items: number; nameOfCars: string[] };
   // localstorageに保存されているrentalsをカート用に加工したものを保存
@@ -18,6 +18,10 @@ export default function DraggableCart() {
   const { rentals } = useRentalsContext();
 
   useEffect(() => {
+    // ***detect mobile ***//
+    if (window.innerWidth <= 800) setIsMobile(true);
+
+    // ***handle rental state in cart***//
     const items = rentals.length;
     const nameOfCars: string[] = (rentals as Rental[]).map((rental) => {
       return rental.car?.brand || '';
@@ -25,24 +29,13 @@ export default function DraggableCart() {
     setReactives({ items: items, nameOfCars: nameOfCars });
   }, [rentals]);
 
-  // const handleDrag = (e: any, ui: any) => {
-  //   const { x, y } = ui;
-  //   setPosition({
-  //     x: x,
-  //     y: y,
-  //   });
-  // };
-
   const handleClick = () => {
     router.push('/cart');
   };
 
   return (
-    <Draggable nodeRef={buttonRef}>
-      <div
-        ref={buttonRef}
-        className='dropdown dropdown-top dropdown-left rounded-full flex-none fixed right-0 bottom-0 mr-4 mb-4 bg-white border shadow-sm text-2xl z-20'
-      >
+    <Draggable disabled={isMobile}>
+      <div className='dropdown dropdown-top dropdown-left rounded-full flex-none fixed right-0 bottom-0 mr-4 mb-4 bg-white border shadow-sm text-2xl z-20'>
         <label tabIndex={1} className='btn btn-ghost btn-circle '>
           <div className='indicator'>
             <svg
