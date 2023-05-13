@@ -32,6 +32,7 @@ export default function DraggableCart() {
   const handleClick = () => {
     router.push('/cart');
   };
+  console.log(reactives);
 
   return (
     <Draggable disabled={isMobile}>
@@ -68,7 +69,7 @@ export default function DraggableCart() {
 
             <div className='card-actions'>
               <button
-                disabled={isEmpty(reactives) ? false : true}
+                disabled={reactives.items === 0 ? true : false}
                 onClick={() => handleClick()}
                 className='btn btn-primary btn-block'
               >
